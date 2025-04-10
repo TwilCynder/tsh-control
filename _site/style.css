@@ -1,0 +1,8 @@
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-right: min(20px, 5vh);
+}
