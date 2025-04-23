@@ -12,9 +12,33 @@ function register(f){
     registerN(f.name, f)
 }
 
+function getAddr(){
+    let elt = document.getElementById("ip");
+    let addr = elt.value;
+    if (!addr) throw "No address specified. Please specify the address at which to find the TSH instance.";
+
+    if (!addr.includes("://")){
+        addr = "http://" + addr;
+    }
+
+    return addr;
+}
+
+async function send(text){
+    try {
+        await sendRequest(getAddr(), text);
+    } catch (err) {
+        if (err instanceof Error){
+            alert(err.message);
+        } else {
+            alert(err);
+        }
+    }
+}
+
 registerN("keydown", (elt) => {
     console.log(elt);
-    sendRequest("http://192.168.1.101:5000","scoreboard0-team1-scoreup")
+    send("scoreboard0-team1-scoreup")
 });
 
 $(".loading").hide();
