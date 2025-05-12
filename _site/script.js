@@ -24,9 +24,9 @@ function getAddr(){
     return addr;
 }
 
-async function send(text){
+async function send(text, body){
     try {
-        await sendRequest(getAddr(), text);
+        return await sendRequest(getAddr(), text, body);
     } catch (err) {
         if (err instanceof Error){
             alert(err.message);
@@ -36,9 +36,9 @@ async function send(text){
     }
 }
 
-registerN("keydown", (elt) => {
+registerN("keydown", async (elt) => {
     console.log(elt);
-    send("scoreboard0-team1-scoreup")
+    console.log(await send("update-commentary-1", {gamerTag: "TwilCynder"}).then(res => res.text()))
 });
 
 $(".loading").hide();
